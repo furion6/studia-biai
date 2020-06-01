@@ -19,7 +19,7 @@ print("Loaded model from disk")
 
 model = loaded_model
 
-
+print("klas:" + str(model.layers[-1].output_shape[-1]))
 
 img_width, img_height = 224, 224
 
