@@ -134,15 +134,15 @@ def relearnImpl():
 	dmodel.add(Dense(512))
 	dmodel.add(Activation('relu'))
 	dmodel.add(Dropout(0.5))
-	dmodel.add(Dense(len(classLabels),activation = 'sigmoid'))
-
+	#dmodel.add(Dense(len(classLabels),activation = 'sigmoid'))
+	dmodel.add(Dense(len(classLabels),activation = 'softmax'))
 
 
 
 
 	dmodel.compile(
-	              #loss='categorical_crossentropy', 
-	              loss='binary_crossentropy',
+	              loss='categorical_crossentropy', 
+	              #loss='binary_crossentropy',
 	              metrics=['acc'],
 	              optimizer='adam'
 	             )
@@ -183,7 +183,7 @@ def relearnImpl():
 	    json_file.write(model_json)
 	model = dmodel
 
-def checkNImpls(json):#softmax
+def checkNImpl(json):#softmax
 	ret = []
 	for j in json['data']:
 		label = j['label'].lower()
@@ -199,7 +199,7 @@ def checkNImpls(json):#softmax
 		ret.append(str(classLabels[np.argmax(classes)-1] == label))
 	return ret
 
-def checkNImpl(json):#sigmoid
+def checkNImpls(json):#sigmoid
 	ret = []
 	print("#########################################[]####################################")
 	for j in json['data']:
@@ -218,7 +218,7 @@ def checkNImpl(json):#sigmoid
 		#ret.append(str(classLabels[np.argmax(classes)-1] == label))
 		labelid = classLabels.index(j['label'].lower())
 		print("eldo")
-		ret.append(classes[labelid] >=0.5)
+		#ret.append(classes[labelid] >=0.5)
 	return ret
 	
 	
